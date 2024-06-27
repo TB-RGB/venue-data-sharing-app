@@ -18,6 +18,7 @@ import AccountInfo from "../AccountInfo/AccountInfo.jsx";
 import MyProfile from "../MyProfile/MyProfile.jsx";
 import SetAccountInfo from "../AccountInfo/SetAccountInfo.jsx";
 
+import 'rsuite/dist/rsuite.min.css';
 import "./App.css";
 
 function App() {

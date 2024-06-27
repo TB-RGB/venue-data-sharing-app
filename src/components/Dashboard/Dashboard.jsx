@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import EventCalendar from "./EventCalendar";
 
 const Dashboard = () => {
   const user = useSelector(store=>store.user)
@@ -9,6 +9,7 @@ const Dashboard = () => {
   return (
     <>
       <h1>Dashboard</h1>
+      <EventCalendar />
     </>
   );
 };
