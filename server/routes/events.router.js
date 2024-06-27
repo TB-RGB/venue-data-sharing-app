@@ -26,9 +26,34 @@ router.get("/:id", rejectUnauthenticated, (req, res) => {
     .then((response) => {
       res.send(response.rows);
     })
-    .catch((error) => {
-      console.error("Error fetching show reports:", error);
+    .catch((err) => {
+      console.error("Error GET show reports route", err);
       res.sendStatus(500);
+    });
+});
+
+router.post("/", rejectUnauthenticated, (req, res) => {
+  const { band_id, venue_id, show_date, door_time, age_restrictions } =
+    req.body;
+  const queryText = `
+  INSERT INTO show_reports (band_id, venue_id, show_date, door_time, age_restrictions)
+  VALUES ($1, $2, $3, $4, $5);
+  `;
+  const paramArray = [
+    band_id,
+    venue_id,
+    show_date,
+    door_time,
+    age_restrictions,
+  ];
+
+  pool
+    .query(queryText, paramArray)
+    .then((response) => {
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.error("Error in POST show route", err);
     });
 });
 

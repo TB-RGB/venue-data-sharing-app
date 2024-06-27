@@ -18,32 +18,31 @@ import AccountInfo from "../AccountInfo/AccountInfo.jsx";
 import MyProfile from "../MyProfile/MyProfile.jsx";
 import SetAccountInfo from "../AccountInfo/SetAccountInfo.jsx";
 
-import 'rsuite/dist/rsuite.min.css';
+import "rsuite/dist/rsuite.min.css";
 import "./App.css";
 
 function App() {
   const dispatch = useDispatch();
 
   const user = useSelector((store) => store.user);
-  const venue = useSelector((store) =>  store.venue);
-
-  
+  const venue = useSelector((store) => store.venue);
 
   useEffect(() => {
     dispatch({ type: "FETCH_USER" });
 
-    if (user.id){
-      dispatch({ type: 'FETCH_VENUE', payload: user.id})
+    if (user.id) {
+      dispatch({ type: "FETCH_VENUE", payload: user.id });
     }
-    
+
+    dispatch({ type: "FETCH_BANDS" });
   }, [dispatch, user.id]);
 
   return (
     <Router>
       <Navbar />
       <Switch>
-        <Route exact path='/'>
-        {user.id ? <Redirect to="/dashboard" /> : <Login />}
+        <Route exact path="/">
+          {user.id ? <Redirect to="/dashboard" /> : <Login />}
         </Route>
         <Route path="/login">
           {user.id ? <Redirect to="/dashboard" /> : <Login />}
@@ -74,11 +73,11 @@ function App() {
         </ProtectedRoute>
 
         <ProtectedRoute path="/account">
-          <AccountInfo  venue={venue}/>
+          <AccountInfo venue={venue} />
         </ProtectedRoute>
 
         <ProtectedRoute path="/accountSetup">
-          {!venue.id ? <SetAccountInfo /> : <Redirect to='/account' />}
+          {!venue.id ? <SetAccountInfo /> : <Redirect to="/account" />}
         </ProtectedRoute>
       </Switch>
     </Router>
