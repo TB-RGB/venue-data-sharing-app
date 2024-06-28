@@ -10,4 +10,6 @@ const eventsReducer =  (
   }
 };
 
+
+
 export default eventsReducer;

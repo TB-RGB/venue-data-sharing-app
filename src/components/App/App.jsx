@@ -20,6 +20,7 @@ import SetAccountInfo from "../AccountInfo/SetAccountInfo.jsx";
 
 import "rsuite/dist/rsuite.min.css";
 import "./App.css";
+import EventDetails from "../EventDetails/EventDetails.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -62,6 +63,10 @@ function App() {
 
         <ProtectedRoute path="/updateShow">
           <UpdateShow />
+        </ProtectedRoute>
+
+        <ProtectedRoute path='/eventDetails/:id'>
+          <EventDetails />
         </ProtectedRoute>
 
         <ProtectedRoute path="/bandPage">
