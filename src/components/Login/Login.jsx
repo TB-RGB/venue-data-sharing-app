@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
+
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const history = useHistory()
 
 
   const userLogin = ()=>{
@@ -25,12 +28,16 @@ const Login = () => {
       />
       <br />
       <input
-        type="text"
+        type="password"
         value={password}
         onChange={(event) => setPassword(event.target.value)}
       />
       <br />
       <button onClick={()=>userLogin()}>Log In</button>
+      <br />
+      <h4>New User?</h4>
+      <br />
+      <button onClick={()=>history.push('/register')}>Register</button>
     </>
   );
 };

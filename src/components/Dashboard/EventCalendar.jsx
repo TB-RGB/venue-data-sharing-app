@@ -66,7 +66,7 @@ const EventCalendar = () => {
                 speaker={renderEventPopover(events)}
               >
                 <div style={{ 
-                  fontSize: '0.8em', 
+                  fontSize: '1em', 
                   overflow: 'hidden', 
                   textOverflow: 'ellipsis', 
                   whiteSpace: 'nowrap' 

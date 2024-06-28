@@ -1,8 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useToaster, Message } from "rsuite";
 
 const AddShow = () => {
+  const toaster = useToaster()
   const dispatch = useDispatch();
   const history = useHistory();
   const bands = useSelector((store) => store.bands);
@@ -30,6 +32,7 @@ const AddShow = () => {
       return;
     } else {
       dispatch({ type: "SEND_NEW_REPORT", payload: showObj });
+      toaster.push(<Message>Event added to calendar!</Message>, {placement: 'topCenter', duration: 5000})  
       history.push("/dashboard");
     }
   };

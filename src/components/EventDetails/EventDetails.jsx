@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { parseISO, setHours, setMinutes, setSeconds, format, isValid } from "date-fns";
 import { ConfirmationModal } from "./ConfirmationModal";
 
 const EventDetails = () => {
+  const { id } = useParams()
   const dispatch = useDispatch();
   const history = useHistory();
   const details = useSelector((store) => store.details);
@@ -30,7 +31,8 @@ const EventDetails = () => {
   };
 
   if (!details || Object.keys(details).length === 0) {
-    return <div>Loading...</div>;
+    dispatch({type: 'FETCH_SHOW_DETAILS', payload: id })
+    
   }
 
   const removeEvent = () => {
