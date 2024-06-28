@@ -10,7 +10,7 @@ import App from "./components/App/App";
 const root = ReactDOM.createRoot(document.getElementById("react-root"));
 root.render(
   <React.StrictMode>
-    <CustomProvider theme="dark">
+    <CustomProvider theme="high-contrast">
       <Provider store={store}>
         <App />
       </Provider>

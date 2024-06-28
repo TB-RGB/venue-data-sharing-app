@@ -1,12 +1,10 @@
 import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Calendar, Whisper, Popover } from "rsuite";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import 'rsuite/Calendar/styles/index.css';
 import { parseISO, format, isValid, setHours, setMinutes, setSeconds } from "date-fns";
 
-const EventCalendar = () => {
-  const history = useHistory()
+const SmallEventCalendar = ({ eventSetter, hideCalendar }) => {
   const dispatch = useDispatch();
   const { showReports, loading } = useSelector((store) => store.events);
   const venue = useSelector((store) => store.venue);
@@ -16,11 +14,6 @@ const EventCalendar = () => {
       dispatch({ type: "FETCH_SHOW_REPORTS", payload: venue.id });
     }
   }, [venue.id]);
-
-  const handleClick = useCallback(event=>{
-    dispatch({type: 'FETCH_SHOW_DETAILS', payload: event.id })
-    history.push(`/eventDetails/${event.id}`)
-    }, [])
 
 
 
@@ -37,18 +30,26 @@ const EventCalendar = () => {
     };
   }).filter(event => event.start !== null);
 
+  const handleClick = useCallback(event =>{
+    console.log(`Clicked event with id: ${event.id}`)
+    eventSetter(event)
+    hideCalendar(false)
+  }, [])
+
   const renderEventPopover = (events) => (
-    <Popover title="Events">
+    <Popover title="Show">
       {events.map((event, index) => (
-        <p key={index}>{event.band_name} - {format(event.start, 'h:mm a')}</p>
+        <p key={index}>
+            {event.band_name} - {format(event.start, 'h:mm a')}
+        </p>
       ))}
     </Popover>
   );
 
-  if (loading) return <div>Loading...</div>;
-
   return (
+    <div style={{ width: 300, justifyContent: 'center' }}>
     <Calendar
+      compact
       bordered
       renderCell={(date) => {
         const formattedDate = format(date, 'yyyy-MM-dd');
@@ -58,7 +59,6 @@ const EventCalendar = () => {
         
         return (
           <div style={{ height: '100%' }}>
-           
             {events.length > 0 && (
               <Whisper
                 placement="top"
@@ -69,7 +69,8 @@ const EventCalendar = () => {
                   fontSize: '0.8em', 
                   overflow: 'hidden', 
                   textOverflow: 'ellipsis', 
-                  whiteSpace: 'nowrap' 
+                  whiteSpace: 'nowrap',
+                  cursor: 'pointer' 
                 }}
                 onClick={()=>handleClick(events[0])}
                 >
@@ -82,7 +83,8 @@ const EventCalendar = () => {
         );
       }}
     />
+    </div>
   );
 };
 
-export default EventCalendar;
+export default SmallEventCalendar;
