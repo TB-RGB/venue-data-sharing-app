@@ -33,24 +33,28 @@ const AccountInfo = () => {
         type="text"
         value={name}
         onChange={(event) => setName(event.target.value)}
+        placeholder="Venue Name"
       />
       <br />
       <input
         type="text"
         value={cap}
         onChange={(event) => setCap(event.target.value)}
+        placeholder="Capacity"
       />
       <br />
       <input
         type="text"
         value={website}
         onChange={(event) => setWebsite(event.target.value)}
+        placeholder="Website"
       />
       <br />
       <input
         type="text"
         value={insta}
         onChange={(event) => setInsta(event.target.value)}
+        placeholder="Instagram"
       />
       <br />
       

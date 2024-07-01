@@ -25,12 +25,14 @@ const Login = () => {
         type="text"
         value={username}
         onChange={(event) => setUsername(event.target.value)}
+        placeholder="username"
       />
       <br />
       <input
         type="password"
         value={password}
         onChange={(event) => setPassword(event.target.value)}
+        placeholder="password"
       />
       <br />
       <button onClick={()=>userLogin()}>Log In</button>
