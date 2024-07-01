@@ -36,76 +36,178 @@ const UpdateShow = () => {
     liquor: Number(liquor),
     other: Number(other),
     id: eventDetails.id,
-    venue_id: venue.id
-}
+    venue_id: venue.id,
+  };
 
-  const sendUpdate = ()=>{
-    const {tixTotal, beer, liquor, other} = putObj
-    if(tixTotal != 0 || beer != 0 || liquor != 0 || other != 0){
-        dispatch({type: 'UPDATE_SHOW_REPORT', payload: putObj})
-        history.push('/dashboard')
+  const sendUpdate = () => {
+    const { tixTotal, beer, liquor, other } = putObj;
+    if (tixTotal != 0 || beer != 0 || liquor != 0 || other != 0) {
+      dispatch({ type: "UPDATE_SHOW_REPORT", payload: putObj });
+      history.push("/dashboard");
     } else {
-        alert('Must fill out all forms, except presale (cuz I know how Minneapolis is :P )')
+      alert(
+        "Must fill out all forms, except presale (cuz I know how Minneapolis is :P )"
+      );
     }
-  }
+  };
 
   return (
     <>
-      <h1>Update</h1>
-      {showCalendar ? <h3>Which Show?</h3> : ''}
-      {showCalendar ? (
-        <SmallEventCalendar
-          eventSetter={setEventDetails}
-          hideCalendar={hideCalendar}
-        />
-      ) : (
-        <div>
-          <h3>Band: {eventDetails.band_name}</h3>
-          <h3>At: {eventDetails.venue_name}</h3>
-          <h4>{formatShowDate(eventDetails.show_date)}</h4>
-          <h4>
-            {formatDoorTime(eventDetails, parseISO(eventDetails.show_date))}
-          </h4>
-          <h4>Capacity: {venue.capacity}</h4>
+      <div className="p-4 bg-gray-800 min-h-screen">
+        <div className="container mx-auto">
+          <h1
+            className="text-4xl mb-2 font-bold text-center"
+            style={{ fontFamily: "Chillax" }}
+          >
+            Update Show Report
+          </h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="card bg-base-100 shadow-xl items-center pb-2">
+              {showCalendar ? (
+                <h3 className="text-xl mt-2">Which Show?</h3>
+              ) : (
+                ""
+              )}
+              {showCalendar ? (
+                <div data-theme="retro" className="card w-4/5 items-center">
+                  <SmallEventCalendar
+                    eventSetter={setEventDetails}
+                    hideCalendar={hideCalendar}
+                  />
+                </div>
+              ) : (
+                <div className="card-body">
+                  <div className="flex justify-center">
+                    <h2 className="card-title text-2xl">Event Details</h2>
+                  </div>
+                  <div className="flex justify-center">
+                    <div className="card bg-base-300 flex-grow">
+                      <div className="stat place-items-center">
+                        <div className="stat-title">Band: </div>
+                        <div className="stat-value">
+                          {eventDetails.band_name}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="divider divider-primary divider-horizontal"></div>
+                    <div className="card bg-base-300 flex-grow">
+                      <div className="stat place-items-center">
+                        <div className="stat-title">At: </div>
+                        <div className="stat-value">
+                          {eventDetails.venue_name}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex justify-center">
+                    <div className="card bg-base-300 flex-grow">
+                      <div className="stat place-items-center">
+                        <div className="stat-title">Capacity: </div>
+                        <div className="stat-value">{venue.capacity}</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex justify-center">
+                    <div className="card bg-base-300 flex-grow">
+                      <div className="stat place-items-center">
+                        <div className="stat-title">Show Date:</div>
+                        <div className="stat-value">
+                          {formatShowDate(eventDetails.show_date)}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="divider divider-primary divider-horizontal"></div>
+                    <div className="card bg-base-300 flex-grow">
+                      <div className="stat place-items-center">
+                        <div className="stat-title">Door Time:</div>
+                        <div className="stat-value">
+                          {formatDoorTime(
+                            eventDetails,
+                            parseISO(eventDetails.show_date)
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="card bg-base-100 shadow-xl"></div>
+            <div className="card bg-base-100 shadow-xl">
+              <div className="card-body items-center">
+                <h3 className="card-title text-2xl">Tickets</h3>
+                <label className="input input-bordered input-accent flex items-center gap-2">
+                  Total Tickets
+                  <input
+                    className="mx-4"
+                    type="number"
+                    placeholder="Total Tickets Sold"
+                    value={tixTotal}
+                    onChange={(event) => setTixTotal(event.target.value)}
+                  />
+                </label>
+                <label className="input input-bordered input-secondary flex items-center gap-2">
+                  Total Presale
+                  <input
+                    className="mx-4"
+                    type="number"
+                    placeholder="Total Presale"
+                    value={presale}
+                    onChange={(event) => setPresale(event.target.value)}
+                  />
+                </label>
+              </div>
+            </div>
+            <div className="card bg-base-100 shadow-xl">
+              <div className="card-body items-center">
+                <h3 className="card-title text-2xl">Drinks</h3>
+                <label className="input input-bordered input-accent flex items-center gap-2">
+                  Total Beer
+                  <input
+                    className="mx-1"
+                    type="number"
+                    placeholder="Total Beer"
+                    value={beer}
+                    onChange={(event) => setBeer(event.target.value)}
+                  />
+                </label>
+                <label className="input input-bordered input-secondary flex items-center gap-2">
+                  Total Liquor
+                  <input
+                    type="number"
+                    placeholder="Total Liquor"
+                    value={liquor}
+                    onChange={(event) => setLiquor(event.target.value)}
+                  />
+                </label>
+                <label className="input input-bordered input-success flex items-center gap-2">
+                  Total Other
+                  <input
+                    type="number"
+                    placeholder="Total Other"
+                    value={other}
+                    onChange={(event) => setOther(event.target.value)}
+                  />
+                </label>
+              </div>
+            </div>
+          </div>
+          <div className="flex justify-center">
+            {putObj.tixTotal != 0 &&
+            putObj.beer != 0 &&
+            putObj.liquor != 0 &&
+            putObj.other != 0 ? (
+              <button className="btn btn-success my-3" onClick={sendUpdate}>
+                Submit Update
+              </button>
+            ) : (
+              <button className="btn btn-disabled my-3">
+                Forms Not Complete
+              </button>
+            )}
+          </div>
         </div>
-      )}
-      <h3>Tickets</h3>
-      <input
-        type="number"
-        placeholder="Total Tickets Sold"
-        value={tixTotal}
-        onChange={(event) => setTixTotal(event.target.value)}
-      />
-      <input
-        type="number"
-        placeholder="Total Presale"
-        value={presale}
-        onChange={(event) => setPresale(event.target.value)}
-      />
-      <h3>Drinks</h3>
-      <input
-        type="number"
-        placeholder="Total Beer"
-        value={beer}
-        onChange={(event) => setBeer(event.target.value)}
-      />
-      <input
-        type="number"
-        placeholder="Total Liquor"
-        value={liquor}
-        onChange={(event) => setLiquor(event.target.value)}
-      />
-      <input
-        type="number"
-        placeholder="Total Other"
-        value={other}
-        onChange={(event) => setOther(event.target.value)}
-      />
-    <br />
-      {/* <pre>{JSON.stringify(eventDetails, null, 2)}</pre>
-      <pre>{JSON.stringify(putObj, null, 2)}</pre> */}
-
-      <button onClick={sendUpdate}>Submit Update</button>
+      </div>
     </>
   );
 };

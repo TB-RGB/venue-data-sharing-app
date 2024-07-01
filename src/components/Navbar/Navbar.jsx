@@ -13,41 +13,15 @@ const Navbar = () => {
 
   return (
     <>
-      {/* <div className="navbar bg-accent">
-        <div className="flex-1">
-          <button
-            onClick={() => history.push("/dashboard")}
-            className="btn btn-ghost text-xl"
-          >
-            Showcase
-          </button>
-        </div>
-        <div className="flex-none">
-          <button className="btn btn-square btn-ghost">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              className="inline-block h-5 w-5 stroke-current"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              ></path>
-            </svg>
-          </button>
-        </div>
-      </div> */}
       <div className="drawer drawer-end">
         <input id="menu-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
-          <div className="navbar bg-accent">
+          <div className="navbar bg-success">
             <div className="flex-1">
               <button
                 onClick={() => history.push("/dashboard")}
-                className="btn btn-ghost text-xl"
+                className="btn btn-ghost text-2xl text-slate-950"
+                style={{fontFamily: 'Chillax'}}
               >
                 Showcase
               </button>
@@ -61,7 +35,7 @@ const Navbar = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  className="inline-block h-5 w-5 stroke-current"
+                  className="inline-block h-5 w-5 stroke-black"
                 >
                   <path
                     strokeLinecap="round"

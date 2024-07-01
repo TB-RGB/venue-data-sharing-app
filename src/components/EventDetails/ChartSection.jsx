@@ -189,7 +189,7 @@ const ChartSection = ({ deleteFn }) => {
     <>
       <div className="p-4 bg-gray-800 min-h-screen">
         <div className="container mx-auto">
-          <h1 className="text-3xl font-bold mb-6 text-center">
+          <h1 className="text-3xl font-bold text-center" style={{fontFamily: 'Hack'}}>
             {details.band_name} at {details.venue_name}
           </h1>
           <div className="flow-root">
@@ -202,7 +202,7 @@ const ChartSection = ({ deleteFn }) => {
 
             <button onClick={deleteFn} className="btn btn-secondary float-end">Delete Event</button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6" style={{fontFamily: 'Fira Code'}}>
             <div className="card bg-base-100 shadow-xl">
               <div className="card-body">
                 <h2 className="card-title">Key Metrics</h2>
