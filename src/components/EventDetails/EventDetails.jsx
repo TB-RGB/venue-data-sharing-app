@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { parseISO, setHours, setMinutes, setSeconds, format, isValid } from "date-fns";
 import { ConfirmationModal } from "./ConfirmationModal";
+import ChartSection from "./ChartSection";
+
 
 const EventDetails = () => {
   const { id } = useParams()
@@ -65,6 +67,8 @@ const EventDetails = () => {
         <h4>Capacity: {details.capacity || "N/A"}</h4>
       </div>
 
+      <ChartSection />
+
       <div>
         <h2>Data</h2>
         <h3>Tickets</h3>
@@ -75,6 +79,9 @@ const EventDetails = () => {
         <h4>Liquor Sold: {details.total_liquor_sold ?? "N/A"}</h4>
         <h4>Other Drinks Sold: {details.total_other_sold ?? "N/A"}</h4>
       </div>
+
+      <pre>{JSON.stringify(details, null, 2)}</pre>
+     
 
       <button onClick={handleDeleteClick}>Delete Event</button>
 

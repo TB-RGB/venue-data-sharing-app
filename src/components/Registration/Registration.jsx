@@ -27,12 +27,14 @@ const Registration = () => {
         type="text"
         value={newUsername}
         onChange={(event) => setNewUsername(event.target.value)}
+        placeholder="username"
       />
       <br />
       <input
         type="password"
         value={newPass}
         onChange={(event) => setNewPass(event.target.value)}
+        placeholder="password"
       />
       <br />
       <button onClick={sendRegister}>Register</button>
