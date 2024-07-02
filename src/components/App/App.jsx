@@ -19,7 +19,8 @@ import MyProfile from "../MyProfile/MyProfile.jsx";
 import SetAccountInfo from "../AccountInfo/SetAccountInfo.jsx";
 
 import "rsuite/dist/rsuite.min.css";
-import "./App.css";
+import "./output.css";
+import './App.css'
 import EventDetails from "../EventDetails/EventDetails.jsx";
 
 function App() {

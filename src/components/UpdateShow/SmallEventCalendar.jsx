@@ -47,7 +47,7 @@ const SmallEventCalendar = ({ eventSetter, hideCalendar }) => {
   );
 
   return (
-    <div style={{ width: 300, justifyContent: 'center' }}>
+    <div style={{ width: 600, height: 400, justifyContent: 'center' }}>
     <Calendar
       compact
       bordered

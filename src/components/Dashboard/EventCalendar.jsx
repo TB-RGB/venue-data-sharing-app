@@ -48,6 +48,7 @@ const EventCalendar = () => {
   if (loading) return <div>Loading...</div>;
 
   return (
+    <div style={{ width: '90%' }}>
     <Calendar
       bordered
       renderCell={(date) => {
@@ -82,6 +83,7 @@ const EventCalendar = () => {
         );
       }}
     />
+    </div>
   );
 };
 

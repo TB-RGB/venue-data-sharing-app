@@ -17,7 +17,7 @@ export const ConfirmationModal = ({ isOpen, onClose, onConfirm, message }) => {
     >
       <div
         style={{
-          background: "white",
+          background: "black",
           padding: "20px",
           borderRadius: "5px",
           maxWidth: "400px",
