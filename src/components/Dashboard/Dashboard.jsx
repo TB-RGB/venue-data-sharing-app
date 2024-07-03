@@ -9,7 +9,7 @@ const Dashboard = () => {
   return (
     <>
       <div className="p-4 bg-gray-800 min-h-screen">
-        <h1 className="text-5xl font-bold text-center" style={{fontFamily: 'Hack'}}>{venue.name}'s Events Dashboard</h1>
+        <h1 className="text-5xl font-bold text-center" style={{fontFamily: 'Chillax'}}>{venue.name}'s Events Dashboard</h1>
         <div className="card mt-5 pb-10 mx-40 pt-5 bg-base-300">
           <div className="flex justify-center mb-2" style={{fontFamily: 'Fira Code'}}>
           <button className="btn btn-primary mx-12" onClick={() => history.push("/addShow")}>

@@ -76,9 +76,9 @@ const UpdateShow = () => {
                   />
                 </div>
               ) : (
-                <div className="card-body">
+                <div className="card-body" style={{fontFamily: 'Fira Code'}}>
                   <div className="flex justify-center">
-                    <h2 className="card-title text-2xl">Event Details</h2>
+                    <h2 className="card-title text-2xl" style={{fontFamily: 'Chillax'}}>Event Details</h2>
                   </div>
                   <div className="flex justify-center">
                     <div className="card bg-base-300 flex-grow">
@@ -133,9 +133,9 @@ const UpdateShow = () => {
               )}
             </div>
             <div className="card bg-base-100 shadow-xl"></div>
-            <div className="card bg-base-100 shadow-xl">
+            <div className="card bg-base-100 shadow-xl" style={{fontFamily: 'Fira Code'}}>
               <div className="card-body items-center">
-                <h3 className="card-title text-2xl">Tickets</h3>
+                <h3 className="card-title text-2xl" style={{fontFamily: 'Chillax'}}>Tickets</h3>
                 <label className="input input-bordered input-accent flex items-center gap-2">
                   Total Tickets
                   <input
@@ -158,13 +158,13 @@ const UpdateShow = () => {
                 </label>
               </div>
             </div>
-            <div className="card bg-base-100 shadow-xl">
+            <div className="card bg-base-100 shadow-xl" style={{fontFamily: 'Fira Code'}}>
               <div className="card-body items-center">
-                <h3 className="card-title text-2xl">Drinks</h3>
+                <h3 className="card-title text-2xl" style={{fontFamily: 'Chillax'}}>Drinks</h3>
                 <label className="input input-bordered input-accent flex items-center gap-2">
                   Total Beer
                   <input
-                    className="mx-1"
+                    className="mx-2"
                     type="number"
                     placeholder="Total Beer"
                     value={beer}
@@ -183,6 +183,7 @@ const UpdateShow = () => {
                 <label className="input input-bordered input-success flex items-center gap-2">
                   Total Other
                   <input
+                    className="mx-2"
                     type="number"
                     placeholder="Total Other"
                     value={other}

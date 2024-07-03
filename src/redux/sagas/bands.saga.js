@@ -10,9 +10,21 @@ function* fetchBands(){
     }
 }
 
+function* addBand(action){
+    try {
+        const newBandResponse = yield axios.post('/api/bands', action.payload)
+        // console.log(newBandResponse.data[0].id)
+        yield put({type: 'SET_NEW_BAND', payload: newBandResponse.data[0].id})
+        yield put({type: 'FETCH_BANDS'})
+    } catch (err){
+        console.log('Error in POST band saga', err)
+    }
+}
+
 
 function* bandsSaga(){
     yield takeLatest('FETCH_BANDS', fetchBands)
+    yield takeLatest('ADD_BAND', addBand)
 }
 
 export default bandsSaga   

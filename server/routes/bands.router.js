@@ -18,4 +18,19 @@ router.get('/', rejectUnauthenticated, (req,res)=>{
         })
 })
 
+router.post('/', rejectUnauthenticated, (req, res)=>{
+    const name = [req.body.name]
+    const queryText = `
+    INSERT INTO band_info (name)
+    VALUES ($1) RETURNING id;
+    `
+    pool.query(queryText, name)
+        .then(response=>{
+            res.send(response.rows)
+        })
+        .catch(err=>{
+            console.log('Error in POST band router', err)
+        })
+})
+
 module.exports = router
