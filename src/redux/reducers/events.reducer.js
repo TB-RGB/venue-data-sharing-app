@@ -3,7 +3,7 @@ const eventsReducer =  (
   action
 ) => {
   switch (action.type) {
-    case "FETCH_SHOW_REPORTS_SUCCESS":
+    case "SET_SHOW_REPORTS":
       return { ...state, loading: false, showReports: action.payload };
     default:
       return state;
