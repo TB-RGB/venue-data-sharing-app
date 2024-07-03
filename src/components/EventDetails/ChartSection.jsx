@@ -143,9 +143,6 @@ const ChartSection = ({ deleteFn }) => {
     },
   };
 
-  const handleClick = () => {
-    setIsStacked(!isStacked);
-  };
 
   const ticketSalesData = {
     labels: ["Presale", "At-Door"],

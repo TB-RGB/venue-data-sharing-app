@@ -37,8 +37,8 @@ const AddShow = () => {
       return;
     } else {
       dispatch({ type: "SEND_NEW_REPORT", payload: showObj });
-      toaster.push(<Message>Event added to calendar!</Message>, {
-        placement: "topCenter",
+      toaster.push(<Message showIcon type="success">Event added to calendar!</Message>, {
+        placement: "bottomCenter",
         duration: 5000,
       });
       history.push("/dashboard");
