@@ -43,7 +43,7 @@ const UpdateShow = () => {
     const { tixTotal, beer, liquor, other } = putObj;
     if (tixTotal != 0 || beer != 0 || liquor != 0 || other != 0) {
       dispatch({ type: "UPDATE_SHOW_REPORT", payload: putObj });
-      history.push("/dashboard");
+      history.push(`/eventDetails/${eventDetails.id}`);
     } else {
       alert(
         "Must fill out all forms, except presale (cuz I know how Minneapolis is :P )"

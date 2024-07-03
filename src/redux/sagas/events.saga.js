@@ -23,6 +23,7 @@ function* sendNewReport(action){
 function* updateShowReport(action){
     try {
         yield axios.put('/api/events', action.payload)
+        yield put({type: 'FETCH_SHOW_DETAILS', payload: action.payload.id })
         yield put({type: 'FETCH_SHOW_REPORTS', payload: action.payload.venue_id})
     } catch (err){
         console.log('Error in PUT events saga', err)
