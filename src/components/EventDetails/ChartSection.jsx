@@ -9,7 +9,7 @@ import {
   ArcElement,
 } from "chart.js";
 import { Bar, Pie } from "react-chartjs-2";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import {
@@ -32,6 +32,7 @@ ChartJS.register(
 
 const ChartSection = ({ deleteFn }) => {
   const history = useHistory();
+  const dispatch = useDispatch()
   const [isStacked, setIsStacked] = useState(false);
   const [chartData, setChartData] = useState(null);
   const [showReport, setShowReport] = useState(null);
@@ -143,7 +144,6 @@ const ChartSection = ({ deleteFn }) => {
     },
   };
 
-
   const ticketSalesData = {
     labels: ["Presale", "At-Door"],
     datasets: [
@@ -181,25 +181,42 @@ const ChartSection = ({ deleteFn }) => {
       details.total_other_sold) /
     details.total_tickets_sold
   ).toFixed(2);
+  const bandDetails = ()=>{
+
+    dispatch({type: 'FETCH_BAND_DETAILS', payload: details.band_id})
+    history.push(`/bandPage/${details.band_id}`)
+  }
 
   return (
     <>
       <div className="p-4 bg-gray-800 min-h-screen">
         <div className="container mx-auto">
-          <h1 className="text-3xl font-bold text-center" style={{fontFamily: 'Hack'}}>
+          <h1
+            className="text-3xl font-bold text-center"
+            style={{ fontFamily: "Chillax" }}
+          >
             {details.band_name} at {details.venue_name}
           </h1>
+          <p className="text-center">
+            <button className="btn btn-sm btn-info" onClick={()=>bandDetails()}>
+                Visit Band Page
+            </button>
+            </p>
           <div className="flow-root">
             <button
               onClick={() => history.push("/dashboard")}
-              className="btn btn-primary mb-4 float-start"
+              className="btn btn-sm btn-primary mb-4 float-start"
             >
               Back to Calendar
             </button>
-
-            <button onClick={deleteFn} className="btn btn-secondary float-end">Delete Event</button>
+            <button onClick={deleteFn} className="btn btn-sm btn-secondary float-end">
+              Delete Event
+            </button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6" style={{fontFamily: 'Fira Code'}}>
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+            style={{ fontFamily: "Fira Code" }}
+          >
             <div className="card bg-base-100 shadow-xl">
               <div className="card-body">
                 <h2 className="card-title">Key Metrics</h2>

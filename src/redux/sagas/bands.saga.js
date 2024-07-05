@@ -21,10 +21,20 @@ function* addBand(action){
     }
 }
 
+function* fetchDetails(action){
+    try {
+        const bandDetailsResponse = yield axios(`/api/events/band/${action.payload}`)
+        yield put({type: 'SET_BAND_DETAILS', payload: bandDetailsResponse.data})
+    } catch (err){
+        console.log('Error in GET band details saga', err)
+    }
+}
+
 
 function* bandsSaga(){
     yield takeLatest('FETCH_BANDS', fetchBands)
     yield takeLatest('ADD_BAND', addBand)
+    yield takeLatest('FETCH_BAND_DETAILS', fetchDetails)
 }
 
 export default bandsSaga   

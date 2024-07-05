@@ -220,7 +220,7 @@ const MyProfile = () => {
 
   return (
     <>
-      <div className="flex flex-col h-screen bg-base-200">
+      <div className="flex flex-col h-screen bg-gray-800">
         {/* <div className="bg-base-100 p-4 shadow-lg">
         <div className="flex items-center space-x-4">
           <input

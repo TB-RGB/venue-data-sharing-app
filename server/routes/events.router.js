@@ -47,6 +47,7 @@ router.get('/event/:id', rejectUnauthenticated, (req, res)=>{
   show_reports.door_time,
   show_reports.id,
   band_info.name as band_name,
+  show_reports.band_id as band_id,
   venue_info.name as venue_name,
   venue_info.capacity,
   show_reports.total_tickets_sold,
@@ -61,6 +62,39 @@ router.get('/event/:id', rejectUnauthenticated, (req, res)=>{
   JOIN venue_info
   ON show_reports.venue_id = venue_info.id
   WHERE show_reports.id = $1;
+`;
+  pool.query(queryText, id)
+    .then(response=>{
+      res.send(response.rows)
+    })
+    .catch(err=>{
+      console.error('Error GET single event route', err)
+      res.sendStatus(500)
+    })
+})
+
+router.get('/band/:id', rejectUnauthenticated, (req, res)=>{
+  const id = [req.params.id]
+  const queryText = `
+  SELECT 
+  show_reports.show_date,
+  show_reports.door_time,
+  show_reports.id,
+  band_info.name as band_name,
+  venue_info.name as venue_name,
+  venue_info.capacity,
+  show_reports.total_tickets_sold,
+  show_reports.total_presale_sold,
+  show_reports.total_beer_sold,
+  show_reports.total_liquor_sold,
+  show_reports.total_other_sold
+  FROM
+  show_reports
+  JOIN band_info
+  ON show_reports.band_id = band_info.id
+  JOIN venue_info
+  ON show_reports.venue_id = venue_info.id
+  WHERE show_reports.band_id = $1;
 `;
   pool.query(queryText, id)
     .then(response=>{
