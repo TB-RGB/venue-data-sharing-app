@@ -59,7 +59,7 @@ const Navbar = () => {
               )}
             </li>
             <li className="mt-5">
-                {user.id && <button className="btn btn-primary">My Profile</button>}
+                {user.id && <button className="btn btn-primary" onClick={()=>history.push('/myProfile')}>My Profile</button>}
             </li>
             <li className="mt-32">
               {user.id && <button className="btn text-lg btn-secondary" onClick={() => logout()}>Log Out</button>}
