@@ -2,11 +2,16 @@
 module.exports = {
   content: ["./src/**/*.jsx"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        foreground: "hsl(var(--foreground))"
+      }
+    },
   },
   plugins: [
     require('@tailwindcss/typography'),
-    require('daisyui')
+    require('tailwindcss-animate'),
+    require('daisyui'),
   ],
     daisyui:{
       themes: ['sunset', 'lemonade', 'retro', 'dracula']
