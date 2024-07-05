@@ -73,7 +73,7 @@ function App() {
           <EventDetails />
         </ProtectedRoute>
 
-        <ProtectedRoute path="/bandPage">
+        <ProtectedRoute path="/bandPage/:id">
           <BandPage />
         </ProtectedRoute>
 

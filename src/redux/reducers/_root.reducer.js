@@ -6,6 +6,7 @@ import events from './events.reducer'
 import bands from './bands.reducer'
 import details from './details.reducer'
 import newBand from './newBand.reducer'
+import bandDetails from './bandDetails.reducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   bands,
   details,
   newBand,
+  bandDetails,
 });
 
 export default rootReducer;
