@@ -13,7 +13,13 @@ router.get("/:id", rejectUnauthenticated, (req, res) => {
         show_reports.door_time,
         show_reports.id,
         band_info.name as band_name,
-        venue_info.name as venue_name
+        venue_info.name as venue_name,
+        venue_info.capacity,
+        show_reports.total_tickets_sold,
+        show_reports.total_presale_sold,
+        show_reports.total_beer_sold,
+        show_reports.total_liquor_sold,
+        show_reports.total_other_sold
         FROM
         show_reports
         JOIN band_info

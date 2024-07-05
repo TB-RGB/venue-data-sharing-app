@@ -35,9 +35,12 @@ function App() {
     if (user.id) {
       dispatch({ type: "FETCH_VENUE", payload: user.id });
     }
+    if (venue.id){
+    dispatch({ type: "FETCH_SHOW_REPORTS", payload: venue.id })
+    }
 
     dispatch({ type: "FETCH_BANDS" });
-  }, [dispatch, user.id]);
+  }, [dispatch, user.id, venue.id]);
 
   return (
     <Router>
@@ -75,7 +78,7 @@ function App() {
         </ProtectedRoute>
 
         <ProtectedRoute path="/myProfile">
-          <MyProfile />
+          <MyProfile venue={venue} />
         </ProtectedRoute>
 
         <ProtectedRoute path="/account">
