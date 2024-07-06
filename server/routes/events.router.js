@@ -156,6 +156,10 @@ router.put('/', rejectUnauthenticated, (req, res)=>{
     })
 })
 
+router.put('/file/:id', rejectUnauthenticated, (req,res)=>{
+
+})
+
 router.delete('/:id', rejectUnauthenticated, (req, res)=>{
   const id = req.params.id
   console.log(id)

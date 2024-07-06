@@ -8,6 +8,7 @@ const UpdateShow = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const venue = useSelector((store) => store.venue);
+  const [file, setFile] = useState(null)
   const [eventDetails, setEventDetails] = useState({});
   const [showCalendar, hideCalendar] = useState(true);
   const [tixTotal, setTixTotal] = useState("0");
@@ -38,6 +39,12 @@ const UpdateShow = () => {
     id: eventDetails.id,
     venue_id: venue.id,
   };
+
+  const handleFileChange = (event)=>{
+    setFile(event.target.files[0])
+  }
+
+  
 
   const sendUpdate = () => {
     const { tixTotal, beer, liquor, other } = putObj;
@@ -132,7 +139,17 @@ const UpdateShow = () => {
                 </div>
               )}
             </div>
-            <div className="card bg-base-100 shadow-xl"></div>
+            <div className="card bg-base-100 shadow-xl items-center">
+              <div className="card bg-base-200 shadow-xl mt-36">
+                <div className="card-body h-44">
+                <h1 className="card-title">Upload .csv</h1>
+                  <div className="flex mt-10">
+                  <input className="file-input file-input-primary mr-5" type="file" accept=".csv" />
+                  <button className="btn btn-success">Submit Update</button>
+                  </div>
+                  </div>
+              </div>
+            </div>
             <div className="card bg-base-100 shadow-xl" style={{fontFamily: 'Fira Code'}}>
               <div className="card-body items-center">
                 <h3 className="card-title text-2xl" style={{fontFamily: 'Chillax'}}>Tickets</h3>
