@@ -255,7 +255,7 @@ const BandPage = ()=>{
         <div className="flex flex-1 overflow-hidden">
           <div className="w-64 bg-base-100 p-4 shadow-lg">
             <h1 className="text-2xl font-bold mb-6">
-              {/* {bandDetails[0].band_name}'s Dashboard */}
+              {bandDetails[0].band_name ? bandDetails[0].band_name : 'Band'}'s Dashboard
             </h1>
             <div className="flex flex-col space-y-2">
               <button
