@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   useHistory,
@@ -15,9 +15,10 @@ const EventDetails = () => {
   const venue = useSelector((store) => store.venue);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  if (!details || Object.keys(details).length === 0) {
+
+  useEffect(()=>{
     dispatch({ type: "FETCH_SHOW_DETAILS", payload: id });
-  }
+  },[])
 
   const removeEvent = () => {
     dispatch({

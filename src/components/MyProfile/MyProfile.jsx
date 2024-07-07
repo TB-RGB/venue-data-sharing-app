@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useState, useMemo } from "react";
 import { Bar, Line, Pie } from "react-chartjs-2";
 import {
@@ -26,6 +27,7 @@ ChartJS.register(
 );
 
 const MyProfile = () => {
+  const history = useHistory();
   const { showReports } = useSelector((store) => store.events);
   const venue = useSelector((store) => store.venue);
   const [selectedChart, setSelectedChart] = useState("ticketVolume");
@@ -40,7 +42,11 @@ const MyProfile = () => {
         beerSold: event.total_beer_sold,
         liquorSold: event.total_liquor_sold,
         otherSold: event.total_other_sold,
-        totalItemsSold: event.total_tickets_sold + event.total_beer_sold + event.total_liquor_sold + event.total_other_sold,
+        totalItemsSold:
+          event.total_tickets_sold +
+          event.total_beer_sold +
+          event.total_liquor_sold +
+          event.total_other_sold,
         bandName: event.band_name,
       }))
       .sort((a, b) => a.date - b.date);
@@ -143,28 +149,28 @@ const MyProfile = () => {
         data: processedData.map((item) => item.ticketsSold),
         backgroundColor: "rgba(255, 99, 132, 0.6)",
         borderColor: "rgba(255, 99, 132, 1)",
-        stack: 'Stack 0',
+        stack: "Stack 0",
       },
       {
         label: "Beer Sold",
         data: processedData.map((item) => item.beerSold),
         backgroundColor: "rgba(54, 162, 235, 0.6)",
         borderColor: "rgba(54, 162, 235, 1)",
-        stack: 'Stack 0',
+        stack: "Stack 0",
       },
       {
         label: "Liquor Sold",
         data: processedData.map((item) => item.liquorSold),
         backgroundColor: "rgba(75, 192, 192, 0.6)",
         borderColor: "rgba(75, 192, 192, 1)",
-        stack: 'Stack 0',
+        stack: "Stack 0",
       },
       {
         label: "Other Drinks Sold",
         data: processedData.map((item) => item.otherSold),
         backgroundColor: "rgba(153, 102, 255, 0.6)",
         borderColor: "rgba(153, 102, 255, 1)",
-        stack: 'Stack 0',
+        stack: "Stack 0",
       },
     ]
   );
@@ -186,7 +192,7 @@ const MyProfile = () => {
     plugins: {
       title: {
         display: true,
-        text: 'Sales per Event',
+        text: "Sales per Event",
       },
     },
     responsive: true,
@@ -200,7 +206,6 @@ const MyProfile = () => {
     },
   };
 
-
   const renderChart = () => {
     switch (selectedChart) {
       case "ticketVolume":
@@ -210,7 +215,13 @@ const MyProfile = () => {
       case "totalVolume":
         return <Line data={totalVolumeChart} options={options} />;
       case "salesComposition":
-        return <Pie style={{height: '600px'}} data={salesCompositionData} options={options} />;
+        return (
+          <Pie
+            style={{ height: "600px" }}
+            data={salesCompositionData}
+            options={options}
+          />
+        );
       case "salesPerEvent":
         return <Bar data={salesPerEventChart} options={{ stackedOptions }} />;
       default:
@@ -220,7 +231,10 @@ const MyProfile = () => {
 
   return (
     <>
-      <div className="flex flex-col h-screen bg-gray-800">
+      <div
+        className="flex flex-col h-screen bg-gray-800"
+        style={{ fontFamily: "Chillax" }}
+      >
         {/* <div className="bg-base-100 p-4 shadow-lg">
         <div className="flex items-center space-x-4">
           <input
@@ -296,6 +310,12 @@ const MyProfile = () => {
                 onClick={() => setSelectedChart("salesPerEvent")}
               >
                 Sales per Event
+              </button>
+              <button
+                className="btn btn-accent"
+                onClick={() => history.push("/dashboard")}
+              >
+                Back to Dashboard
               </button>
             </div>
           </div>
