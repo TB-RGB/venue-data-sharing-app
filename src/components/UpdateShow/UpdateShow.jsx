@@ -8,7 +8,7 @@ const UpdateShow = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const venue = useSelector((store) => store.venue);
-  const [file, setFile] = useState(null)
+  const [file, setFile] = useState(null);
   const [eventDetails, setEventDetails] = useState({});
   const [showCalendar, hideCalendar] = useState(true);
   const [tixTotal, setTixTotal] = useState("0");
@@ -40,17 +40,34 @@ const UpdateShow = () => {
     venue_id: venue.id,
   };
 
-  const handleFileChange = (event)=>{
-    setFile(event.target.files[0])
-  }
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
 
-  
+  const sendFile = () => {
+    if (!file) {
+      alert("Please select a file");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    dispatch({
+      type: "UPDATE_WITH_FILE",
+      payload: { file: formData, id: eventDetails.id, venue_id: venue.id },
+    });
+    setFile(null);
+    history.push(`/eventDetails/${eventDetails.id}`);
+    setEventDetails({})
+  };
 
   const sendUpdate = () => {
     const { tixTotal, beer, liquor, other } = putObj;
     if (tixTotal != 0 || beer != 0 || liquor != 0 || other != 0) {
       dispatch({ type: "UPDATE_SHOW_REPORT", payload: putObj });
       history.push(`/eventDetails/${eventDetails.id}`);
+      setEventDetails({})
     } else {
       alert(
         "Must fill out all forms, except presale (cuz I know how Minneapolis is :P )"
@@ -71,7 +88,7 @@ const UpdateShow = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="card bg-base-100 shadow-xl items-center pb-2">
               {showCalendar ? (
-                <h3 className="text-xl mt-2">Which Show?</h3>
+                <h3 className="text-xl mt-2" style={{ fontFamily: "Chillax" }}>Which Show?</h3>
               ) : (
                 ""
               )}
@@ -83,9 +100,14 @@ const UpdateShow = () => {
                   />
                 </div>
               ) : (
-                <div className="card-body" style={{fontFamily: 'Fira Code'}}>
+                <div className="card-body" style={{ fontFamily: "Fira Code" }}>
                   <div className="flex justify-center">
-                    <h2 className="card-title text-2xl" style={{fontFamily: 'Chillax'}}>Event Details</h2>
+                    <h2
+                      className="card-title text-2xl"
+                      style={{ fontFamily: "Chillax" }}
+                    >
+                      Event Details
+                    </h2>
                   </div>
                   <div className="flex justify-center">
                     <div className="card bg-base-300 flex-grow">
@@ -140,19 +162,34 @@ const UpdateShow = () => {
               )}
             </div>
             <div className="card bg-base-100 shadow-xl items-center">
-              <div className="card bg-base-200 shadow-xl mt-36">
+              <div className="card bg-base-200 shadow-xl mt-36" style={{fontFamily: 'Chillax'}}>
                 <div className="card-body h-44">
-                <h1 className="card-title">Upload .csv</h1>
+                  <h1 className="card-title">Upload .csv</h1>
                   <div className="flex mt-10">
-                  <input className="file-input file-input-primary mr-5" type="file" accept=".csv" />
-                  <button className="btn btn-success">Submit Update</button>
+                    <input
+                      className="file-input file-input-primary mr-5"
+                      type="file"
+                      accept=".csv"
+                      onChange={handleFileChange}
+                    />
+                    <button onClick={sendFile} className={!file ? "btn btn-disabled" : "btn btn-success"}>
+                      Submit Update
+                    </button>
                   </div>
-                  </div>
+                </div>
               </div>
             </div>
-            <div className="card bg-base-100 shadow-xl" style={{fontFamily: 'Fira Code'}}>
+            <div
+              className="card bg-base-100 shadow-xl"
+              style={{ fontFamily: "Fira Code" }}
+            >
               <div className="card-body items-center">
-                <h3 className="card-title text-2xl" style={{fontFamily: 'Chillax'}}>Tickets</h3>
+                <h3
+                  className="card-title text-2xl"
+                  style={{ fontFamily: "Chillax" }}
+                >
+                  Tickets
+                </h3>
                 <label className="input input-bordered input-accent flex items-center gap-2">
                   Total Tickets
                   <input
@@ -175,9 +212,17 @@ const UpdateShow = () => {
                 </label>
               </div>
             </div>
-            <div className="card bg-base-100 shadow-xl" style={{fontFamily: 'Fira Code'}}>
+            <div
+              className="card bg-base-100 shadow-xl"
+              style={{ fontFamily: "Fira Code" }}
+            >
               <div className="card-body items-center">
-                <h3 className="card-title text-2xl" style={{fontFamily: 'Chillax'}}>Drinks</h3>
+                <h3
+                  className="card-title text-2xl"
+                  style={{ fontFamily: "Chillax" }}
+                >
+                  Drinks
+                </h3>
                 <label className="input input-bordered input-accent flex items-center gap-2">
                   Total Beer
                   <input
@@ -215,11 +260,11 @@ const UpdateShow = () => {
             putObj.beer != 0 &&
             putObj.liquor != 0 &&
             putObj.other != 0 ? (
-              <button className="btn btn-success my-3" onClick={sendUpdate}>
+              <button className="btn btn-success my-3" onClick={sendUpdate} style={{ fontFamily: "Chillax" }}>
                 Submit Update
               </button>
             ) : (
-              <button className="btn btn-disabled my-3">
+              <button className="btn btn-disabled my-3" style={{ fontFamily: "Chillax" }}>
                 Forms Not Complete
               </button>
             )}

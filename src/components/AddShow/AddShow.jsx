@@ -71,7 +71,7 @@ const AddShow = () => {
                   {!hideInputs ? (
                     <input
                       type="text"
-                      className="input input-secondary mb-2 w-48"
+                      className={band === "" ? "input input-secondary mb-2 w-48" : "input input-disabled mb-2 w-48"}
                       value={newBand}
                       onChange={(event) => setNewBand(event.target.value)}
                     />
@@ -86,7 +86,7 @@ const AddShow = () => {
                   {!hideInputs ? (
                     <button
                       onClick={() => addBand()}
-                      className="btn btn-success ml-10"
+                      className={band === "" ? "btn btn-success ml-10" : "btn btn-disabled ml-10"}
                     >
                       Add Band
                     </button>

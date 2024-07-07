@@ -30,6 +30,17 @@ function* updateShowReport(action){
     }
 }
 
+function* updateWithFile(action){
+    try{
+        const { file , id, venue_id } = action.payload
+        yield axios.put(`/api/events/file/${id}`, file)
+        yield put({type: 'FETCH_SHOW_DETAILS', payload: id})
+        yield put({type: 'FETCH_SHOW_REPORTS', payload: venue_id})
+    } catch (err){
+        console.log('Error in PUT file events saga', err)
+    }
+}
+
 function* fetchShowDetails(action){
     try {
         const detailsResponse = yield axios(`/api/events/event/${action.payload}`)
@@ -54,6 +65,7 @@ function* eventsSaga(){
     yield takeLatest('FETCH_SHOW_REPORTS', fetchEvents)
     yield takeLatest('SEND_NEW_REPORT', sendNewReport)
     yield takeLatest('UPDATE_SHOW_REPORT', updateShowReport)
+    yield takeLatest('UPDATE_WITH_FILE', updateWithFile)
     yield takeLatest('FETCH_SHOW_DETAILS', fetchShowDetails)
     yield takeLatest('DROP_SHOW', dropShow)
 }

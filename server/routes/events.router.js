@@ -4,6 +4,12 @@ const {
   rejectUnauthenticated,
 } = require("../modules/authentication-middleware");
 const router = express.Router();
+const multer = require("multer");
+const csv = require("csvtojson");
+
+// * Multer storage declaration for csvfile
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 router.get("/:id", rejectUnauthenticated, (req, res) => {
   const id = [req.params.id];
@@ -39,8 +45,8 @@ router.get("/:id", rejectUnauthenticated, (req, res) => {
     });
 });
 
-router.get('/event/:id', rejectUnauthenticated, (req, res)=>{
-  const id = [req.params.id]
+router.get("/event/:id", rejectUnauthenticated, (req, res) => {
+  const id = [req.params.id];
   const queryText = `
   SELECT 
   show_reports.show_date,
@@ -63,18 +69,19 @@ router.get('/event/:id', rejectUnauthenticated, (req, res)=>{
   ON show_reports.venue_id = venue_info.id
   WHERE show_reports.id = $1;
 `;
-  pool.query(queryText, id)
-    .then(response=>{
-      res.send(response.rows)
+  pool
+    .query(queryText, id)
+    .then((response) => {
+      res.send(response.rows);
     })
-    .catch(err=>{
-      console.error('Error GET single event route', err)
-      res.sendStatus(500)
-    })
-})
+    .catch((err) => {
+      console.error("Error GET single event route", err);
+      res.sendStatus(500);
+    });
+});
 
-router.get('/band/:id', rejectUnauthenticated, (req, res)=>{
-  const id = [req.params.id]
+router.get("/band/:id", rejectUnauthenticated, (req, res) => {
+  const id = [req.params.id];
   const queryText = `
   SELECT 
   show_reports.show_date,
@@ -96,15 +103,16 @@ router.get('/band/:id', rejectUnauthenticated, (req, res)=>{
   ON show_reports.venue_id = venue_info.id
   WHERE show_reports.band_id = $1;
 `;
-  pool.query(queryText, id)
-    .then(response=>{
-      res.send(response.rows)
+  pool
+    .query(queryText, id)
+    .then((response) => {
+      res.send(response.rows);
     })
-    .catch(err=>{
-      console.error('Error GET single event route', err)
-      res.sendStatus(500)
-    })
-})
+    .catch((err) => {
+      console.error("Error GET single event route", err);
+      res.sendStatus(500);
+    });
+});
 
 router.post("/", rejectUnauthenticated, (req, res) => {
   const { band_id, venue_id, show_date, door_time, age_restrictions } =
@@ -131,49 +139,78 @@ router.post("/", rejectUnauthenticated, (req, res) => {
     });
 });
 
-router.put('/', rejectUnauthenticated, (req, res)=>{
-  const { tixTotal, presale, beer, liquor, other, id} = req.body
+router.put("/", rejectUnauthenticated, (req, res) => {
+  const { tixTotal, presale, beer, liquor, other, id } = req.body;
   const queryText = `
   UPDATE show_reports
   SET total_tickets_sold=$1, total_presale_sold=$2, total_beer_sold=$3, total_liquor_sold=$4, total_other_sold=$5
   WHERE id=$6;
   `;
-  const paramArray = [
-    tixTotal,
-    presale,
-    beer,
-    liquor,
-    other,
-    id,
-  ];
+  const paramArray = [tixTotal, presale, beer, liquor, other, id];
 
-  pool.query(queryText, paramArray)
-    .then(response=>{
-      res.sendStatus(204)
+  pool
+    .query(queryText, paramArray)
+    .then((response) => {
+      res.sendStatus(204);
     })
-    .catch(err=>{
-      console.error('Error in PUT show route', err)
-    })
-})
+    .catch((err) => {
+      console.error("Error in PUT show route", err);
+    });
+});
 
-router.put('/file/:id', rejectUnauthenticated, (req,res)=>{
+router.put(
+  "/file/:id",
+  rejectUnauthenticated,
+  upload.single("file"),
+  async (req, res) => {
+    if (!req.file) {
+      return res.status(400).send("No file uploaded");
+    }
+    const showId = req.params.id;
 
-})
+    try {
+      const jsonArray = await csv().fromString(req.file.buffer.toString());
+      if (jsonArray.length === 0) {
+        return res.status(400).send("CSV file is empty or invalid");
+      }
 
-router.delete('/:id', rejectUnauthenticated, (req, res)=>{
-  const id = req.params.id
-  console.log(id)
+      const queryText = `
+    UPDATE show_reports SET
+    total_tickets_sold=$1, total_presale_sold=$2,
+    total_beer_sold=$3, total_liquor_sold=$4, total_other_sold=$5
+    WHERE id=$6;
+    `;
+
+      await pool.query(queryText, [
+        jsonArray[0].total_tickets_sold,
+        jsonArray[0].total_presale_sold,
+        jsonArray[0].total_beer_sold,
+        jsonArray[0].total_liquor_sold,
+        jsonArray[0].total_other_sold,
+        showId,
+      ]);
+    } catch (err) {
+      console.log("Error in PUT file route", err);
+      res.sendStatus(500);
+    }
+  }
+);
+
+router.delete("/:id", rejectUnauthenticated, (req, res) => {
+  const id = req.params.id;
+  console.log(id);
   const queryText = `
   DELETE FROM show_reports
   WHERE id = $1;
-  `
-  pool.query(queryText, [id])
-    .then(response=>{
-      res.sendStatus(204)
+  `;
+  pool
+    .query(queryText, [id])
+    .then((response) => {
+      res.sendStatus(204);
     })
-    .catch(err=>{
-      console.error("Error in DELETE show route", err)
-    })
-})
+    .catch((err) => {
+      console.error("Error in DELETE show route", err);
+    });
+});
 
 module.exports = router;
