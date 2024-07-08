@@ -61,13 +61,14 @@ const MyProfile = () => {
   });
 
   const ticketVolumeChart = createChartData(
-    processedData.map((item) => `${item.bandName} (${item.date})`),
+    processedData.map((item) => `${item.bandName}`),
     [
       {
         label: "Total Tickets Sold",
         data: processedData.map((item) => item.ticketsSold),
         backgroundColor: "rgba(75, 192, 192, 0.6)",
         borderColor: "rgba(75, 192, 192, 1)",
+        color: '#CCEFEC'
       },
       {
         label: "Presale Tickets",
@@ -79,7 +80,7 @@ const MyProfile = () => {
   );
 
   const drinkVolumeChart = createChartData(
-    processedData.map((item) => `${item.bandName} (${item.date})`),
+    processedData.map((item) => `${item.bandName}`),
     [
       {
         label: "Beer Volume",
@@ -103,7 +104,7 @@ const MyProfile = () => {
   );
 
   const totalVolumeChart = createChartData(
-    processedData.map((item) => `${item.bandName} (${item.date})`),
+    processedData.map((item) => `${item.bandName}`),
     [
       {
         label: "Total Items Sold",
@@ -179,13 +180,29 @@ const MyProfile = () => {
     responsive: true,
     plugins: {
       legend: {
+        labels: {
+             color: '#CCEFEC'
+        },
         position: "top",
       },
       title: {
         display: true,
         text: "Event Performance Dashboard",
+        color: '#CCEFEC'
       },
     },
+    scales: {
+        x : {
+            ticks: {
+                 color: '#CCEFEC'
+            }
+        },
+        y: {
+            ticks:{
+                 color: '#CCEFEC'
+            }
+        }
+    }
   };
 
   const stackedOptions = {

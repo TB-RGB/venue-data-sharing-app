@@ -22,6 +22,7 @@ import "rsuite/dist/rsuite.min.css";
 import "./output.css";
 import './App.css'
 import EventDetails from "../EventDetails/EventDetails.jsx";
+import About from "../About/About.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -55,6 +56,10 @@ function App() {
 
         <Route path="/register">
           {user.id ? <Redirect to="/account" /> : <Registration />}
+        </Route>
+
+        <Route path='/about'>
+          <About />
         </Route>
 
         <ProtectedRoute path="/dashboard">
