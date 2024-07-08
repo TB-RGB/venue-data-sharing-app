@@ -2718,24 +2718,6 @@ html:has(.drawer-toggle:checked) {
   scrollbar-gutter: stable;
 }
 
-.file-input-sm {
-  height: 2rem;
-  padding-inline-end: 0.75rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  line-height: 2;
-}
-
-.file-input-sm::-webkit-file-upload-button {
-  margin-right: 0.75rem;
-  font-size: 0.875rem;
-}
-
-.file-input-sm::file-selector-button {
-  margin-right: 0.75rem;
-  font-size: 0.875rem;
-}
-
 .join.join-vertical {
   flex-direction: column;
 }
@@ -2832,6 +2814,10 @@ html:has(.drawer-toggle:checked) {
 
 .fixed {
   position: fixed;
+}
+
+.relative {
+  position: relative;
 }
 
 .float-start {
@@ -2943,6 +2929,10 @@ html:has(.drawer-toggle:checked) {
   margin-right: 0.75rem;
 }
 
+.mr-5 {
+  margin-right: 1.25rem;
+}
+
 .mt-10 {
   margin-top: 2.5rem;
 }
@@ -2967,6 +2957,10 @@ html:has(.drawer-toggle:checked) {
   margin-top: 8rem;
 }
 
+.mt-36 {
+  margin-top: 9rem;
+}
+
 .mt-5 {
   margin-top: 1.25rem;
 }
@@ -2975,12 +2969,12 @@ html:has(.drawer-toggle:checked) {
   margin-top: 2rem;
 }
 
-.mt-36 {
-  margin-top: 9rem;
+.mb-56 {
+  margin-bottom: 14rem;
 }
 
-.mr-5 {
-  margin-right: 1.25rem;
+.mb-96 {
+  margin-bottom: 24rem;
 }
 
 .inline-block {
@@ -3007,6 +3001,10 @@ html:has(.drawer-toggle:checked) {
   height: 66.666667%;
 }
 
+.h-44 {
+  height: 11rem;
+}
+
 .h-5 {
   height: 1.25rem;
 }
@@ -3019,12 +3017,8 @@ html:has(.drawer-toggle:checked) {
   height: 100vh;
 }
 
-.h-20 {
-  height: 5rem;
-}
-
-.h-44 {
-  height: 11rem;
+.h-1\/2 {
+  height: 50%;
 }
 
 .min-h-full {
@@ -3077,10 +3071,6 @@ html:has(.drawer-toggle:checked) {
 
 .w-1\/2 {
   width: 50%;
-}
-
-.w-2\/3 {
-  width: 66.666667%;
 }
 
 .max-w-sm {
@@ -3165,6 +3155,10 @@ html:has(.drawer-toggle:checked) {
 
 .overflow-hidden {
   overflow: hidden;
+}
+
+.text-wrap {
+  text-wrap: wrap;
 }
 
 .bg-base-100 {

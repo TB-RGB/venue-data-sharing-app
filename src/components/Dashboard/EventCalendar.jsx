@@ -70,7 +70,8 @@ const EventCalendar = () => {
                   fontSize: '1em', 
                   overflow: 'hidden', 
                   textOverflow: 'ellipsis', 
-                  whiteSpace: 'nowrap' 
+                  whiteSpace: 'nowrap',
+                  fontFamily: 'Hack', 
                 }}
                 onClick={()=>handleClick(events[0])}
                 >

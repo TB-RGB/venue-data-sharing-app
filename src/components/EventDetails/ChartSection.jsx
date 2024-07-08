@@ -93,6 +93,7 @@ const ChartSection = ({ deleteFn }) => {
         showReport.total_other_sold,
       ],
       backgroundColor: ["#36A2EB", "#FF6384", "#FFCE56", "#4BC0C0", "#FF9F40"],
+      color: '#BEE7DD',
     },
   ];
   const getStackedDatasets = () => [
@@ -100,30 +101,35 @@ const ChartSection = ({ deleteFn }) => {
       label: "Presale Tickets",
       data: [showReport.total_presale_sold, 0],
       backgroundColor: "#FF6384",
+      color: '#BEE7DD',
       stack: "Stack 0",
     },
     {
       label: "All Tickets",
       data: [showReport.total_tickets_sold, 0],
       backgroundColor: "#36A2EB",
+      color: '#BEE7DD',
       stack: "Stack 0",
     },
     {
       label: "Beer",
       data: [0, showReport.total_beer_sold],
       backgroundColor: "#FFCE56",
+      color: '#BEE7DD',
       stack: "Stack 1",
     },
     {
       label: "Liquor",
       data: [0, showReport.total_liquor_sold],
       backgroundColor: "#4BC0C0",
+      color: '#BEE7DD',
       stack: "Stack 1",
     },
     {
       label: "Other",
       data: [0, showReport.total_other_sold],
       backgroundColor: "#FF9F40",
+      color: '#BEE7DD',
       stack: "Stack 1",
     },
   ];
