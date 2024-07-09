@@ -63,44 +63,43 @@ const MyProfile = () => {
   const ticketVolumeChart = createChartData(
     processedData.map((item) => `${item.bandName}`),
     [
-      {
-        label: "Total Tickets Sold",
-        data: processedData.map((item) => item.ticketsSold),
-        backgroundColor: "rgba(75, 192, 192, 0.6)",
-        borderColor: "rgba(75, 192, 192, 1)",
-        color: '#CCEFEC'
-      },
-      {
-        label: "Presale Tickets",
-        data: processedData.map((item) => item.presaleSold),
-        backgroundColor: "rgba(255, 159, 64, 0.6)",
-        borderColor: "rgba(255, 159, 64, 1)",
-      },
-    ]
+        {
+          label: "Total Tickets Sold",
+          data: processedData.map((item) => item.ticketsSold),
+          backgroundColor: "#36A2EB",
+          // borderColor: "rgba(75, 192, 192, 1)",
+        },
+        {
+          label: "Presale Tickets",
+          data: processedData.map((item) => item.presaleSold),
+          backgroundColor: "#FF6384",
+          // borderColor: "rgba(255, 159, 64, 1)",
+        },
+      ]
   );
 
   const drinkVolumeChart = createChartData(
     processedData.map((item) => `${item.bandName}`),
     [
-      {
-        label: "Beer Volume",
-        data: processedData.map((item) => item.beerSold),
-        backgroundColor: "rgba(255, 206, 86, 0.6)",
-        borderColor: "rgba(255, 206, 86, 1)",
-      },
-      {
-        label: "Liquor Volume",
-        data: processedData.map((item) => item.liquorSold),
-        backgroundColor: "rgba(153, 102, 255, 0.6)",
-        borderColor: "rgba(153, 102, 255, 1)",
-      },
-      {
-        label: "Other Drinks Volume",
-        data: processedData.map((item) => item.otherSold),
-        backgroundColor: "rgba(255, 99, 132, 0.6)",
-        borderColor: "rgba(255, 99, 132, 1)",
-      },
-    ]
+        {
+          label: "Beer Volume",
+          data: processedData.map((item) => item.beerSold),
+          backgroundColor: "#FFCE56",
+          // borderColor: "rgba(255, 206, 86, 1)",
+        },
+        {
+          label: "Liquor Volume",
+          data: processedData.map((item) => item.liquorSold),
+          backgroundColor: "rgba(153, 102, 255, 0.6)",
+          borderColor: "rgba(153, 102, 255, 1)",
+        },
+        {
+          label: "Other Drinks Volume",
+          data: processedData.map((item) => item.otherSold),
+          backgroundColor: "rgba(75, 192, 192, 0.6)",
+          // borderColor: "rgba(255, 99, 132, 1)",
+        },
+      ]
   );
 
   const totalVolumeChart = createChartData(
@@ -148,29 +147,29 @@ const MyProfile = () => {
       {
         label: "Tickets Sold",
         data: processedData.map((item) => item.ticketsSold),
-        backgroundColor: "rgba(255, 99, 132, 0.6)",
-        borderColor: "rgba(255, 99, 132, 1)",
+        backgroundColor: "#36A2EB",
+        // borderColor: "rgba(255, 99, 132, 1)",
         stack: "Stack 0",
       },
       {
         label: "Beer Sold",
         data: processedData.map((item) => item.beerSold),
-        backgroundColor: "rgba(54, 162, 235, 0.6)",
-        borderColor: "rgba(54, 162, 235, 1)",
+        backgroundColor: "#FFCE56",
+        // borderColor: "rgba(54, 162, 235, 1)",
         stack: "Stack 0",
       },
       {
         label: "Liquor Sold",
         data: processedData.map((item) => item.liquorSold),
-        backgroundColor: "rgba(75, 192, 192, 0.6)",
-        borderColor: "rgba(75, 192, 192, 1)",
+        backgroundColor: "rgba(153, 102, 255, 0.6)",
+        // borderColor: "rgba(75, 192, 192, 1)",
         stack: "Stack 0",
       },
       {
         label: "Other Drinks Sold",
         data: processedData.map((item) => item.otherSold),
-        backgroundColor: "rgba(153, 102, 255, 0.6)",
-        borderColor: "rgba(153, 102, 255, 1)",
+        backgroundColor: "rgba(75, 192, 192, 0.6)",
+        // borderColor: "rgba(153, 102, 255, 1)",
         stack: "Stack 0",
       },
     ]
@@ -181,43 +180,73 @@ const MyProfile = () => {
     plugins: {
       legend: {
         labels: {
-             color: '#CCEFEC'
+          color: "#E5E7EB",
+          font: {
+            size: 18,
+          },
         },
         position: "top",
       },
       title: {
-        display: true,
+        display: false,
         text: "Event Performance Dashboard",
-        color: '#CCEFEC'
+        color: "#CCEFEC",
       },
     },
     scales: {
-        x : {
-            ticks: {
-                 color: '#CCEFEC'
-            }
+      x: {
+        ticks: {
+          color: "#E5E7EB",
+          font: {
+            size: 16,
+          },
         },
-        y: {
-            ticks:{
-                 color: '#CCEFEC'
-            }
-        }
-    }
+      },
+      y: {
+        ticks: {
+          color: "#E5E7EB",
+          font: {
+            size: 16,
+          },
+        },
+      },
+    },
   };
 
   const stackedOptions = {
+    responsive: true,
     plugins: {
       title: {
-        display: true,
+        display: false,
         text: "Sales per Event",
       },
+      legend: {
+        position: "top",
+        labels: {
+            color: "#E5E7EB",
+            font: {
+                size: 16
+            }
+        }
+      },
     },
-    responsive: true,
     scales: {
       x: {
+        ticks: {
+          color: "#E5E7EB",
+          font: {
+            size: 16,
+          },
+        },
         stacked: true,
       },
       y: {
+        ticks: {
+          color: "#E5E7EB",
+          font: {
+            size: 16,
+          },
+        },
         stacked: true,
       },
     },
@@ -240,7 +269,7 @@ const MyProfile = () => {
           />
         );
       case "salesPerEvent":
-        return <Bar data={salesPerEventChart} options={{ stackedOptions }} />;
+        return <Bar data={salesPerEventChart} options={stackedOptions} />;
       default:
         return null;
     }
@@ -308,7 +337,7 @@ const MyProfile = () => {
               >
                 Total Volume
               </button>
-              <button
+              {/* <button
                 className={`btn ${
                   selectedChart === "salesComposition"
                     ? "btn-primary"
@@ -317,7 +346,7 @@ const MyProfile = () => {
                 onClick={() => setSelectedChart("salesComposition")}
               >
                 Sales Composition
-              </button>
+              </button> */}
               <button
                 className={`btn ${
                   selectedChart === "salesPerEvent"
