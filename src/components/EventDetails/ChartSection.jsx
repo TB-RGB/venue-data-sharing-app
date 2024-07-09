@@ -92,7 +92,7 @@ const ChartSection = ({ deleteFn }) => {
         showReport.total_liquor_sold,
         showReport.total_other_sold,
       ],
-      backgroundColor: ["#36A2EB", "#FF6384", "#FFCE56", "#4BC0C0", "#FF9F40"],
+      backgroundColor: ["#36A2EB", "#FF6384", "#FFCE56", "rgba(153, 102, 255, 0.6)", "rgba(75, 192, 192, 0.6)"],
       color: '#BEE7DD',
     },
   ];
@@ -121,14 +121,14 @@ const ChartSection = ({ deleteFn }) => {
     {
       label: "Liquor",
       data: [0, showReport.total_liquor_sold],
-      backgroundColor: "#4BC0C0",
+      backgroundColor: "rgba(153, 102, 255, 0.6)",
       color: '#BEE7DD',
       stack: "Stack 1",
     },
     {
       label: "Other",
       data: [0, showReport.total_other_sold],
-      backgroundColor: "#FF9F40",
+      backgroundColor: "rgba(75, 192, 192, 0.6)",
       color: '#BEE7DD',
       stack: "Stack 1",
     },
@@ -136,8 +136,22 @@ const ChartSection = ({ deleteFn }) => {
   const options = {
     responsive: true,
     scales: {
-      x: { stacked: isStacked },
-      y: { stacked: isStacked },
+      x: { stacked: isStacked,
+        ticks: {
+            color: "#E5E7EB",
+            font: {
+                size: 16
+            } 
+        }
+       },
+      y: { stacked: isStacked,
+        ticks: {
+            color: "#E5E7EB",
+            font: {
+                size: 16
+            }
+        }
+       },
     },
     plugins: {
       legend: { display: false },
@@ -146,9 +160,28 @@ const ChartSection = ({ deleteFn }) => {
         text: isStacked
           ? `Stacked Bar Chart: ${details.band_name} at ${details.venue_name}`
           : `Unstacked Bar Chart: ${details.band_name} at ${details.venue_name}`,
+        color: "#E5E7EB",
+        font: {
+            size: 14
+        }
       },
     },
   };
+
+  const pieOptions = {
+    responsive: true,
+    plugins: {
+        legend: {
+            labels: {
+                color: '#E5E7EB',
+                font: {
+                    size: 14
+                },
+            },
+            position: 'top'
+        }
+    }
+  }
 
   const ticketSalesData = {
     labels: ["Presale", "At-Door"],
@@ -172,7 +205,7 @@ const ChartSection = ({ deleteFn }) => {
           details.total_liquor_sold,
           details.total_other_sold,
         ],
-        backgroundColor: ["#FFCE56", "#4BC0C0", "#FF9F40"],
+        backgroundColor: ["#FFCE56", "rgba(153, 102, 255, 0.6)", "rgba(75, 192, 192, 0.6)"],
       },
     ],
   };
@@ -298,7 +331,7 @@ const ChartSection = ({ deleteFn }) => {
                 ) : (
                   <div>Loading...</div>
                 )}
-                <p className="text-sm text-gray-500 mt-2">
+                <p className="text-sm text-gray-200 font-bold text-center mt-2">
                   Click on the chart to toggle between stacked and unstacked
                   view
                 </p>
@@ -312,7 +345,7 @@ const ChartSection = ({ deleteFn }) => {
                   className="flex justify-center"
                   style={{ width: "800px", height: "400px" }}
                 >
-                  <Pie data={ticketSalesData} />
+                  <Pie data={ticketSalesData} options={pieOptions} />
                 </div>
               </div>
             </div>
@@ -324,7 +357,7 @@ const ChartSection = ({ deleteFn }) => {
                   style={{ width: "800px", height: "400px" }}
                   className="flex justify-center"
                 >
-                  <Pie data={drinkSalesData} />
+                  <Pie data={drinkSalesData} options={pieOptions} />
                 </div>
               </div>
             </div>

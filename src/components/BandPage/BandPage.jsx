@@ -30,7 +30,7 @@ ChartJS.register(
 );
 
 const BandPage = () => {
-  const history = useHistory()
+  const history = useHistory();
   const { id } = useParams();
   const dispatch = useDispatch();
   const bandDetails = useSelector((store) => store.bandDetails);
@@ -73,14 +73,14 @@ const BandPage = () => {
       {
         label: "Total Tickets Sold",
         data: processedData.map((item) => item.ticketsSold),
-        backgroundColor: "rgba(75, 192, 192, 0.6)",
-        borderColor: "rgba(75, 192, 192, 1)",
+        backgroundColor: "#36A2EB",
+        // borderColor: "rgba(75, 192, 192, 1)",
       },
       {
         label: "Presale Tickets",
         data: processedData.map((item) => item.presaleSold),
-        backgroundColor: "rgba(255, 159, 64, 0.6)",
-        borderColor: "rgba(255, 159, 64, 1)",
+        backgroundColor: "#FF6384",
+        // borderColor: "rgba(255, 159, 64, 1)",
       },
     ]
   );
@@ -91,8 +91,8 @@ const BandPage = () => {
       {
         label: "Beer Volume",
         data: processedData.map((item) => item.beerSold),
-        backgroundColor: "rgba(255, 206, 86, 0.6)",
-        borderColor: "rgba(255, 206, 86, 1)",
+        backgroundColor: "#FFCE56",
+        // borderColor: "rgba(255, 206, 86, 1)",
       },
       {
         label: "Liquor Volume",
@@ -103,8 +103,8 @@ const BandPage = () => {
       {
         label: "Other Drinks Volume",
         data: processedData.map((item) => item.otherSold),
-        backgroundColor: "rgba(255, 99, 132, 0.6)",
-        borderColor: "rgba(255, 99, 132, 1)",
+        backgroundColor: "rgba(75, 192, 192, 0.6)",
+        // borderColor: "rgba(255, 99, 132, 1)",
       },
     ]
   );
@@ -154,29 +154,29 @@ const BandPage = () => {
       {
         label: "Tickets Sold",
         data: processedData.map((item) => item.ticketsSold),
-        backgroundColor: "rgba(255, 99, 132, 0.6)",
-        borderColor: "rgba(255, 99, 132, 1)",
+        backgroundColor: "#36A2EB",
+        // borderColor: "rgba(255, 99, 132, 1)",
         stack: "Stack 0",
       },
       {
         label: "Beer Sold",
         data: processedData.map((item) => item.beerSold),
-        backgroundColor: "rgba(54, 162, 235, 0.6)",
-        borderColor: "rgba(54, 162, 235, 1)",
+        backgroundColor: "#FFCE56",
+        // borderColor: "rgba(54, 162, 235, 1)",
         stack: "Stack 0",
       },
       {
         label: "Liquor Sold",
         data: processedData.map((item) => item.liquorSold),
-        backgroundColor: "rgba(75, 192, 192, 0.6)",
-        borderColor: "rgba(75, 192, 192, 1)",
+        backgroundColor: "rgba(153, 102, 255, 0.6)",
+        // borderColor: "rgba(75, 192, 192, 1)",
         stack: "Stack 0",
       },
       {
         label: "Other Drinks Sold",
         data: processedData.map((item) => item.otherSold),
-        backgroundColor: "rgba(153, 102, 255, 0.6)",
-        borderColor: "rgba(153, 102, 255, 1)",
+        backgroundColor: "rgba(75, 192, 192, 0.6)",
+        // borderColor: "rgba(153, 102, 255, 1)",
         stack: "Stack 0",
       },
     ]
@@ -187,27 +187,76 @@ const BandPage = () => {
     plugins: {
       legend: {
         position: "top",
+        labels: {
+            color: "#E5E7EB",
+            font: {
+                size: 16
+            }
+        }
       },
       title: {
-        display: true,
+        display: false,
         text: "Event Performance Dashboard",
+        color: "#E5E7EB",
+        font: {
+            size: 14
+        }
       },
+    },
+    scales: {
+      x: {
+        ticks: {
+          color: "#E5E7EB",
+          font: {
+            size: 18,
+          },
+        },
+      },
+      y: {
+        ticks: {
+            color: "#E5E7EB",
+            font: {
+                size: 16
+            }
+        }
+      }
     },
   };
 
   const stackedOptions = {
+    responsive: true,
     plugins: {
       title: {
-        display: true,
+        display: false,
         text: "Sales per Event",
       },
+      legend: {
+        position: "top",
+        labels: {
+            color: "#E5E7EB",
+            font: {
+                size: 16
+            }
+        }
+      },
     },
-    responsive: true,
     scales: {
       x: {
+        ticks: {
+          color: "#E5E7EB",
+          font: {
+            size: 16,
+          },
+        },
         stacked: true,
       },
       y: {
+        ticks: {
+          color: "#E5E7EB",
+          font: {
+            size: 16,
+          },
+        },
         stacked: true,
       },
     },
@@ -230,7 +279,7 @@ const BandPage = () => {
           />
         );
       case "salesPerEvent":
-        return <Bar data={salesPerEventChart} options={{ stackedOptions }} />;
+        return <Bar data={salesPerEventChart} options={stackedOptions} />;
       default:
         return null;
     }
@@ -238,7 +287,10 @@ const BandPage = () => {
 
   return (
     <>
-      <div className="flex flex-col h-screen bg-gray-800" style={{ fontFamily: "Chillax" }}>
+      <div
+        className="flex flex-col h-screen bg-gray-800"
+        style={{ fontFamily: "Chillax" }}
+      >
         {/* <div className="bg-base-100 p-4 shadow-lg">
         <div className="flex items-center space-x-4">
           <input
@@ -268,8 +320,7 @@ const BandPage = () => {
         <div className="flex flex-1 overflow-hidden">
           <div className="w-64 bg-base-100 p-4 shadow-lg">
             <h1 className="text-2xl font-bold mb-6">
-              {!bandDetails[0] ? "Band" : bandDetails[0].band_name}'s
-              Dashboard
+              {!bandDetails[0] ? "Band" : bandDetails[0].band_name}'s Dashboard
             </h1>
             <div className="flex flex-col space-y-2">
               <button
@@ -296,7 +347,7 @@ const BandPage = () => {
               >
                 Total Volume
               </button>
-              <button
+              {/* <button
                 className={`btn ${
                   selectedChart === "salesComposition"
                     ? "btn-primary"
@@ -305,7 +356,7 @@ const BandPage = () => {
                 onClick={() => setSelectedChart("salesComposition")}
               >
                 Sales Composition
-              </button>
+              </button> */}
               <button
                 className={`btn ${
                   selectedChart === "salesPerEvent"
