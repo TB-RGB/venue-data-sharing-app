@@ -10,6 +10,12 @@
     url('Hack-Bold.ttf');
 }
 
+@font-face {
+    font-family: 'Fira Code';
+    src: local('Fira-Code') 
+    url('Fira-Code.ttf');
+}
+
 /* body {
     font-family: 'Hack';
 } */
